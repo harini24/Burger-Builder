@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Aux from '../../hoc/Auxillary'
 import Burger from '../../Components/Burger/Burger'
 import BuildControls from '../../Components/Burger/BuildControls/BuildControls'
-import { object } from 'prop-types'
+import Modal from '../../Components/UI/Modal/Modal'
+import OrderSummary from '../../Components/Burger/OrderSummary/OrderSummary'
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -25,10 +26,11 @@ class BurgerBuilder extends Component {
             meat: 0
         },
         totalPrice: 4,
-        purchasable: false
+        purchasable: false,
+        purchasing:false
     }
 
-    updatePurchaseState= (ingredients)=> {
+    updatePurchaseState = (ingredients) => {
         const sum = Object.keys(ingredients)
             .map(key => {
                 return ingredients[key]
@@ -37,7 +39,13 @@ class BurgerBuilder extends Component {
                 return sum + ele;
             }, 0)
         this.setState({
-            purchasable:sum>0
+            purchasable: sum > 0
+        })
+    }
+
+    purchaseHnadler = () => {
+        this.setState({
+            purchasing:true
         })
     }
 
@@ -71,7 +79,7 @@ class BurgerBuilder extends Component {
             ingredients: updatedIngredients,
             totalPrice: newPrice
         })
-        this.updatePurchaseState(updatedIngredients) 
+        this.updatePurchaseState(updatedIngredients)
     }
     render() {
         const disabledInfo = {
@@ -82,13 +90,19 @@ class BurgerBuilder extends Component {
         }
         return (
             <Aux>
+                <Modal show ={this.state.purchasing}>
+                    <OrderSummary  
+                        ingredients={this.state.ingredients}/>
+                </Modal>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls
                     ingredientAdded={this.addIngredientHandler}
                     ingredientRemoved={this.removeIngredientHandler}
                     disabled={disabledInfo}
-                    price={this.state.totalPrice} 
-                    purchasable={this.state.purchasable}/>
+                    price={this.state.totalPrice}
+                    purchasable={this.state.purchasable}
+                    purchasing={this.purchaseHnadler}
+                />
 
             </Aux>
         );
