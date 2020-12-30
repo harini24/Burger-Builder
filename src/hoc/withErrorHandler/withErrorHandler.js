@@ -30,7 +30,7 @@ const withErrorHandler = (WrapperComponent,axios) => {
         render() {
             return (
                 <Aux>
-                    <Modal show={this.state.errors} clicked={this.errorConfirmerHandler}>
+                    <Modal show={this.state.errors} modelClosed={this.errorConfirmerHandler}>
                        {this.state.errors && this.state.errors.message}
                     </Modal>
                     <WrapperComponent {...this.props} />
