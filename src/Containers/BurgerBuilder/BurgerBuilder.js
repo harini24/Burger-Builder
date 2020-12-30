@@ -165,4 +165,4 @@ class BurgerBuilder extends Component {
     }
 }
 
-export default WithErrorHandler(BurgerBuilder);
+export default WithErrorHandler(BurgerBuilder,axios);

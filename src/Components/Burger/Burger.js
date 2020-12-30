@@ -5,19 +5,16 @@ const burger = (props) => {
     //js function that returns aray of keys
     let tranformedIngredients = Object.keys(props.ingredients)
         .map(igkey => {
-            console.log(igkey)
             return [...Array(props.ingredients[igkey])].map((_, i) =>{
-                console.log(i)
                     return <BurgerIngredient key={igkey + i} type={igkey} />
                 } )
         })
-        .reduce((arr,el)=>{ console.log(arr) 
+        .reduce((arr,el)=>{ 
             return arr.concat(el) },[])
 
     if (tranformedIngredients.length === 0){
         tranformedIngredients=<p>Please start adding ingredients</p>
     }
-    console.log(tranformedIngredients)
     return (
         <div className={classes.Burger}>
             <BurgerIngredient type="bread-top" />
