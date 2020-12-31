@@ -3,17 +3,26 @@ import Modal from '../../Components/UI/Modal/Modal'
 import Aux from '../Auxillary/Auxillary'
 const withErrorHandler = (WrapperComponent,axios) => {
     return class extends Component {
-
+        
         state = {
             errors: null
         }
+        // constructor(props) {
+        //     super(props)
 
+           
+
+           
+        // }
+
+        
         errorConfirmerHandler = () => {
             this.setState({
                 errors:null
             })
         }
-        componentDidMount() {
+
+        render() {
             axios.interceptors.request.use( req => {
                 this.setState({
                     errors: null
@@ -24,10 +33,10 @@ const withErrorHandler = (WrapperComponent,axios) => {
                 this.setState({
                     errors: error
                 })
-                return Promise.reject(error)
+                return Promise.reject(error)  // in the tutorial this line is not present and so it throws another erros
+                // that is when the inderedient end point has error, but the code doesnt have catch at that function 
+                //as we return the error here that issue is resolved
             })
-        }
-        render() {
             return (
                 <Aux>
                     <Modal show={this.state.errors} modelClosed={this.errorConfirmerHandler}>
