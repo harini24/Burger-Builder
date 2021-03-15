@@ -30,6 +30,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount() {
+        console.log("in burger builder",this.props)
         axios.get('https://react-burger-builder-29b01-default-rtdb.firebaseio.com/ingredients.json')
             .then(response => {
                 this.setState({
@@ -64,40 +65,42 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        this.setState({
-            loading: true
-        })
-        // alert('you Continue!')
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Harini',
-                address: {
-                    street: 'bucket wheel streer',
-                    zipcode: 'adcdef',
-                    country: 'India'
-                }
-            },
-            email: 'test@gmail.com',
-            deliveryMethod: 'express'
-        }
-        axios.post('/orders.json', order).then(
-            response => {
-                console.log(response)
-                this.setState({
-                    loading: false,
-                    purchasing: false
-                })
-            }
-        )
-            .catch(error => {
-                console.log(error)
-                this.setState({
-                    loading: false,
-                    purchasing: false
-                })
-            })
+        // this.setState({
+        //     loading: true
+        // })
+        // // alert('you Continue!')
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalPrice,
+        //     customer: {
+        //         name: 'Harini',
+        //         address: {
+        //             street: 'bucket wheel streer', 
+        //             zipcode: 'adcdef',
+        //             country: 'India'
+        //         }
+        //     },
+        //     email: 'test@gmail.com',
+        //     deliveryMethod: 'express'
+        // }
+        // axios.post('/orders.json', order).then(
+        //     response => {
+        //         console.log(response)
+        //         this.setState({
+        //             loading: false,
+        //             purchasing: false
+        //         })
+        //     }
+        // )
+        //     .catch(error => {
+        //         console.log(error)
+        //         this.setState({
+        //             loading: false,
+        //             purchasing: false
+        //         })
+        //     })
+
+        this.props.history.push("/checkout")
     }
 
     purchaseHnadler = () => {
