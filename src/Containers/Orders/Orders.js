@@ -1,5 +1,6 @@
 import { Component } from "react";
 import Order from '../../Components/Order/Order'
+
 class Orders extends Component{
 
 render(){
@@ -11,4 +12,4 @@ render(){
 }
 }
 
-export default orders
+export default Orders
